@@ -36,8 +36,25 @@ def predict_mx_plus_b(x: np.array, y: np.array) -> tuple[float, float, object]:
 
     model = LinearRegression().fit(x,y)
     m = round(model.coef_[0],5)
-    x = round(model.intercept_,5)
+    b = round(model.intercept_,5)
     def mx_b(x1):
-        return x1 
+        return (m*x1) + b
 
-    return (m, x, mx_b)
+    return (m, b, mx_b)
+
+
+def predict_mx_plus_b_from_df(df: pd.DataFrame, x: str, y: str) -> tuple[float, float, object]:
+    '''Pass in the DataFrame, name of the x column, and name of the y column to predict the slope, intercept, 
+    and a function for passing x to 'y=mx+b'
+    
+    Args:
+        df: DataFrame containing the values
+        x: x series
+        y: y series
+
+    Returns:
+        A tuple containg m, b, and the function mx+b that takes x as a parameter
+    '''
+
+    np_x, np_y = get_x_y_arrays(df,x,y)
+    return predict_mx_plus_b(np_x, np_y)
