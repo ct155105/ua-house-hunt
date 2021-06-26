@@ -1,6 +1,6 @@
 import pandas as pd
-from ct_helpers.data_science_helpers import data_science_helpers as ds
-from ct_helpers.df_helpers import df_filters as df
+from ds_helpers import data_science_helpers as ds
+from df_helpers import df_filters as df
 
 class Dimension():
     def __init__(self, df: pd.DataFrame, x_column: str, y_column: str):

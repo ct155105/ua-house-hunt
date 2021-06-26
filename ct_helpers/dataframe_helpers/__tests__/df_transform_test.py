@@ -1,4 +1,4 @@
-import ct_helpers.df_helpers.df_transformers as ct
+import df_helpers.df_transformers as ct
 import pandas as pd
 
 def test_trim_column_names():

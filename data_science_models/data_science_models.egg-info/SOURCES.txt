@@ -1,0 +1,8 @@
+setup.py
+data_science_models.egg-info/PKG-INFO
+data_science_models.egg-info/SOURCES.txt
+data_science_models.egg-info/dependency_links.txt
+data_science_models.egg-info/top_level.txt
+models/__init__.py
+models/dimension.py
+models/linear_ai.py

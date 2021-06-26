@@ -5,6 +5,9 @@ def filter_residential(df: pd.DataFrame) -> pd.DataFrame:
     
     Args:
         df: The dataframe to filter
+
+    Returns:
+        The filtered DF
     '''
 
     filtered = df[df['BLDTYP'].str.contains('Dwelling',na=False)]

@@ -1,7 +1,7 @@
 import pandas as pd
 from pandas.core.frame import DataFrame
 from models.dimension import Dimension
-from ct_helpers.df_helpers.df_transformers import trim_col_names
+from df_helpers.df_transformers import trim_col_names
 
 class Linear_AI():
     '''Houses all the modeled dimensions for a DataFrame'''

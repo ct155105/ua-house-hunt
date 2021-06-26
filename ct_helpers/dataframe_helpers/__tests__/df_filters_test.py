@@ -1,4 +1,4 @@
-import ct_helpers.df_helpers.df_filters as ct
+import df_helpers.df_filters as ct
 import pandas as pd
 
 d = {'test_col_1': ['foo','bar','baz','foo','bar','foo','foofoo', None], 

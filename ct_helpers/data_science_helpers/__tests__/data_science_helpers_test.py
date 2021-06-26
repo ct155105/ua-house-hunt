@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np 
-import ct_helpers.data_science_helpers.data_science_helpers as ds
-
+import ds_helpers.data_science_helpers as ds
 
 def test_get_numpy_x_y_from_df():
     d = {"col1": [1,2,3], "col2": [4,5,6]}
