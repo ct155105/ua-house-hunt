@@ -1,20 +1,27 @@
 import pandas as pd
 from timeit import default_timer as timer
+from county_services.oh import franklin as fk
+from models import linear_ai 
+
 
 start = timer()
-full_df = pd.read_csv('Parcel_Boundaries.csv')
+df = pd.read_csv('data/oh/franklin/Parcel_Boundaries.csv')
 end = timer()
 print(end - start)
 
-#UA TAX CODE IS 070
-ua_df = full_df[full_df['CVTTXCD'] == 70]
+df = fk.get_neighborhood(df,'Upper Arlington')
+df = fk.get_resi(df)
+
+ai = linear_ai.Linear_AI(df[['ATTIC','BASEMENT','ROOMS','BATHS','HBATHS','BEDRMS',fk.get_tax_value_column()]], fk.get_tax_value_column())
+
+print('test')
 
 #KENSINGTON ONLY
-ken_df = ua_df[ua_df['SITEADDRESS'].str.contains('SOUTHWAY',na=False)][['PARCELID','SALEDATE','SITEADDRESS','SALEPRICE']]
+# ken_df = ua_df[ua_df['SITEADDRESS'].str.contains('SOUTHWAY',na=False)][['PARCELID','SALEDATE','SITEADDRESS','SALEPRICE']]
 
 #TRANSACTIONS
-tran_df = pd.read_csv('Property_Sales_Transactions.csv')
-ua_tran_df = tran_df[tran_df['CVTTXCD'] == 70]
+# tran_df = pd.read_csv('Property_Sales_Transactions.csv')
+# ua_tran_df = tran_df[tran_df['CVTTXCD'] == 70]
 
 #GET PRICE BY
 #FIND SQUARE FOOTAGE
