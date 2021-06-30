@@ -15,7 +15,11 @@ class Linear_AI():
             
         '''
 
+        self.error_columns = {}
+
         df = trim_col_names(df)
         for col in df.columns:
-            self.col = Dimension(df,col,value_column)
-            
+            try:
+                setattr(self, col, Dimension(df,col,value_column))
+            except Exception as e:
+                self.error_columns[col] = str(e)

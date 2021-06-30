@@ -19,6 +19,7 @@ def get_resi(df: pd.DataFrame) -> pd.DataFrame:
     filtered = df[df['BLDTYP'].str.contains('Dwelling',na=False)]
     return filtered
 
+
 def get_neighborhood_code(neighborhood: str) -> int:
     '''Look up for CVTTXCD column, which is where Frankling county stores the local tax district
     
@@ -102,6 +103,7 @@ def append_attic_cd(df: pd.DataFrame) -> pd.DataFrame:
         df with the new column appended    
     '''
 
-    df['attic_cd'] =  df['ATTIC'].apply(lambda x: get_attic_cd(x))
+    df2 = df.copy()
+    df2['attic_cd'] = df2['ATTIC'].apply(lambda x: get_attic_cd(x))
 
-    return df
+    return df2

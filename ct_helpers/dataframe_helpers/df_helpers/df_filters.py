@@ -33,3 +33,21 @@ def remove_zeros(df: pd.DataFrame, column: str) -> pd.DataFrame:
 
     result = df[df[column] > 0]
     return result
+
+
+def remove_nan_from_columns(df: pd.DataFrame, *args: str) -> pd.DataFrame:
+    '''Removes records with NaN in the specified column names from the dataframe.
+    
+    Args:
+        df: The DataFrame to filter
+        *args: Variable number of column names to filter
+
+    Returns:
+        A filtered copy of df
+    '''
+
+    df2 = df.copy()
+    for arg in args:
+        df2.dropna(subset = [arg], inplace=True)
+
+    return df2

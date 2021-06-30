@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt 
 from sklearn.linear_model import LinearRegression
 
 def get_x_y_arrays(df: pd.DataFrame, x: str, y: str) -> tuple[np.array, np.array]:
@@ -49,8 +50,8 @@ def predict_mx_plus_b_from_df(df: pd.DataFrame, x: str, y: str) -> tuple[float, 
     
     Args:
         df: DataFrame containing the values
-        x: x series
-        y: y series
+        x: x series column name
+        y: y series column name
 
     Returns:
         A tuple containg m, b, and the function mx+b that takes x as a parameter
@@ -58,3 +59,31 @@ def predict_mx_plus_b_from_df(df: pd.DataFrame, x: str, y: str) -> tuple[float, 
 
     np_x, np_y = get_x_y_arrays(df,x,y)
     return predict_mx_plus_b(np_x, np_y)
+
+
+def get_plot_and_scatter_image(df: pd.DataFrame, x: str, y: str, output_path: str) -> None:
+    '''Creates a matplotlib scatter chart with a line plot showing the linear regression model.
+    Useful when doing data analysis
+    
+    Args:
+        df: DataFrame containing the values
+        x: x series column name
+        y: y series column name
+        output_path: path for the outputed image file
+
+    Returns:
+        None -> the function itself returns the value None, but an image is outputted to the specified location
+
+    '''
+
+    np_x = df[x].to_numpy()
+    np_y = df[y].to_numpy()
+
+    plt.scatter(np_x, np_y, 1)
+
+    ln_x, ln_y = get_x_y_arrays(df, x, y)
+    model = LinearRegression().fit(ln_x, ln_y)
+    test_y = model.predict(ln_x)
+    plt.plot(ln_x,test_y, color='black', linewidth=3)
+
+    plt.savefig(output_path)

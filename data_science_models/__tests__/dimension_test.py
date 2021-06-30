@@ -1,8 +1,10 @@
 from models.dimension import Dimension as dm
 import pandas as pd
+import numpy as np
 
-def test_dimension_constructor():
-    data = {"rooms": [0,1,2], "SalePrice": [4000,5000,6000], "footage": [0,1000,2000]}
+
+def test_dimension_init():
+    data = {"rooms": [0,1,2,np.NaN,10], "SalePrice": [4000,5000,6000,7000,np.NaN], "footage": [0,1000,2000,3000,4000]}
     df = pd.DataFrame(data)
 
     dim = dm(df,"rooms", "SalePrice")
@@ -14,3 +16,5 @@ def test_dimension_constructor():
     #y = 1000x + 4000
     #y = 1000(3) + 4000
     assert dim.calc(3) == 7000
+
+    assert dim.mean == 5000

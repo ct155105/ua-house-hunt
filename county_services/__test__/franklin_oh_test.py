@@ -47,7 +47,7 @@ def test_get_attic_cd():
 
 
 def test_attic_cd_append():
-    d = {'ATTIC': ['NO ATTIC','NO ATTIC','ATTIC UNF','1/2 ATTIC FINISH','3/4 ATTIC FINISH','FULL ATTIC FINISH','DOES NOT MATCH']}
+    d = {'test': ['NO ATTIC','NO ATTIC','ATTIC UNF','1/2 ATTIC FINISH','3/4 ATTIC FINISH','FULL ATTIC FINISH','DOES NOT MATCH'], 'ATTIC': ['NO ATTIC','NO ATTIC','ATTIC UNF','1/2 ATTIC FINISH','3/4 ATTIC FINISH','FULL ATTIC FINISH','DOES NOT MATCH']}
     df = pd.DataFrame(d)
     df = fkoh.append_attic_cd(df)
     values = df['attic_cd'].values.tolist() 
