@@ -1,5 +1,5 @@
 import pandas as pd
-from ds_helpers import data_science_helpers as ds
+from ds_helpers import linear_regression as ds
 from df_helpers import df_filters as df_fil
 
 class Dimension():

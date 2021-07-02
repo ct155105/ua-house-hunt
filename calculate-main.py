@@ -2,7 +2,7 @@ import pandas as pd
 from timeit import default_timer as timer
 from county_services.oh import franklin as fk
 from models import linear_ai 
-from ds_helpers import data_science_helpers as ds
+from ds_helpers import linear_regression as ds
 
 
 start = timer()

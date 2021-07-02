@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt 
 from sklearn.linear_model import LinearRegression
+from ct_math import algebra as alg 
 
 def get_x_y_arrays(df: pd.DataFrame, x: str, y: str) -> tuple[np.array, np.array]:
     '''Returns a tuple of numpy arrays from dataframe to easily transform dataframe for data science library processing
@@ -60,6 +61,27 @@ def predict_mx_plus_b_from_df(df: pd.DataFrame, x: str, y: str) -> tuple[float, 
     np_x, np_y = get_x_y_arrays(df,x,y)
     return predict_mx_plus_b(np_x, np_y)
 
+
+def get_predicted_house_price(property: dict, linear_functions: dict) -> float:
+    '''Calculates the expected value of the property by calculating each dimension's expected value and averaging
+    
+    Args:
+        property: A dictionary object with keys equal to a property dimension and value equal to the value of that dimension for the given property
+        linear_functionas: a dictionary object with key equal to a dimension and value equal to the mx+b function object modeled for that dimension
+
+    Returns:
+        The predicted value of the house
+    '''
+
+    values = []
+
+    for key in property:
+        if key in linear_functions:
+            values.append(linear_functions[key](property[key]))
+
+    mean = alg.get_average_of_list_values(values)
+
+    return mean
 
 def get_plot_and_scatter_image(df: pd.DataFrame, x: str, y: str, output_path: str) -> None:
     '''Creates a matplotlib scatter chart with a line plot showing the linear regression model.

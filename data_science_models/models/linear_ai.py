@@ -20,6 +20,9 @@ class Linear_AI():
         df = trim_col_names(df)
         for col in df.columns:
             try:
-                setattr(self, col, Dimension(df,col,value_column))
+                d = Dimension(df,col,value_column)
+                setattr(self, col, d.calc)
             except Exception as e:
                 self.error_columns[col] = str(e)
+
+    

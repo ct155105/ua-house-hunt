@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np 
-import ds_helpers.data_science_helpers as ds
+import ds_helpers.linear_regression as ds
 
 def test_get_numpy_x_y_from_df():
     d = {"col1": [1,2,3], "col2": [4,5,6]}
@@ -34,3 +34,25 @@ def test_predict_mx_plus_b_from_df():
     #y = 1x + 3
     #2 = 1(2) + 3
     assert test[2](2) == 5
+
+
+def test_get_predicted_house_price():
+    prop = { "acres": 10, "rooms": 5, "basement": 0, "NA": 100 }
+
+    #mock y = mx + b for the dimensions
+    def mock_acres_line(x):
+        y = (100*x) + 1000
+        return y
+    def mock_rooms_line(x):
+        y = (50*x) + 500
+        return y
+    def mock_basement_line(x):
+        y = (200*x) + 10
+        return y
+
+    
+    lf = { "acres": mock_acres_line, "rooms": mock_rooms_line, "basement": mock_basement_line }
+
+    predicted = ds.get_predicted_house_price(prop, lf)
+
+    assert predicted == 920
