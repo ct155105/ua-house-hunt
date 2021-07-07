@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def string_column(df: pd.DataFrame, column: str, value: str, exact: bool = False) -> pd.DataFrame:
     """Filters DataFrame string column by the specified value
 
@@ -19,6 +20,7 @@ def string_column(df: pd.DataFrame, column: str, value: str, exact: bool = False
 
     result = df[df[column].str.contains(value,na=False)]
     return result
+
 
 def remove_zeros(df: pd.DataFrame, column: str) -> pd.DataFrame:
     """Filters DataFrame for zero values in the specified column

@@ -62,6 +62,7 @@ def predict_mx_plus_b_from_df(df: pd.DataFrame, x: str, y: str) -> tuple[float, 
     return predict_mx_plus_b(np_x, np_y)
 
 
+# TODO This is not really a generic helper... Should probably go to a generic utilities module for the application
 def get_predicted_house_price(property: dict, linear_functions: dict) -> float:
     '''Calculates the expected value of the property by calculating each dimension's expected value and averaging
     
