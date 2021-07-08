@@ -1,5 +1,9 @@
 FROM python:3
 
+RUN pip install -e 'git+https://github.com/ct155105/ct_python_helpers.git@main#egg=ds_helpers&subdirectory=data_science_helpers/pkg'
+RUN pip install -e 'git+https://github.com/ct155105/ct_python_helpers.git@main#egg=df_helpers&subdirectory=dataframe_wrappers/pkg'
+RUN pip install -e 'git+https://github.com/ct155105/ct_python_helpers.git@main#egg=ct_math&subdirectory=math_helpers/pkg'
+
 # # [Optional] Allow the vscode user to pip install globally w/o sudo
 # ENV PIP_TARGET=/usr/local/pip-global
 # ENV PYTHONPATH=${PIP_TARGET}:${PYTHONPATH}

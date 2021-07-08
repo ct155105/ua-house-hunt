@@ -1,7 +1,0 @@
-setup.py
-data_science_helpers.egg-info/PKG-INFO
-data_science_helpers.egg-info/SOURCES.txt
-data_science_helpers.egg-info/dependency_links.txt
-data_science_helpers.egg-info/top_level.txt
-ds_helpers/__init__.py
-ds_helpers/data_science_helpers.py
