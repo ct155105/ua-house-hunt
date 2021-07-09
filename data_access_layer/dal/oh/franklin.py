@@ -18,7 +18,7 @@ def get_transactions() -> pd.DataFrame:
         A dataframe with 3 years worth of transactions records for the county
     '''
     
-    df = pd.read_csv('data/oh/franklin/Property_Sales_Transactions.csv')
+    df = pd.read_csv('data/oh/franklin/Property_Sales_Transactions.csv', low_memory=False)
     return df
 
 

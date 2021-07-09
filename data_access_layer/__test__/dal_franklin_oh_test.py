@@ -11,6 +11,6 @@ def test_get_transactions():
     assert transactions.shape[0] > 10000
 
 
-# def test_get_combined():
-#     combined = dal.get_combined()
-#     assert combined.shape[0] > 10000
+def test_get_combined():
+    combined = dal.get_combined()
+    assert combined.shape[0] > 10000
