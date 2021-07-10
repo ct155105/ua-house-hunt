@@ -1,6 +1,7 @@
 from models.dimension import Dimension as dm
 import pandas as pd
 import numpy as np
+import pytest
 
 
 def test_dimension_init():
@@ -18,3 +19,9 @@ def test_dimension_init():
     assert dim.calc(3) == 7000
 
     assert dim.mean == 5000
+
+    #check for empty dataframe
+    with pytest.raises(Exception) as e_info:
+        data = {"rooms": [np.NaN,np.NaN,np.NaN], "SalePrice": [4000,5000,6000]}
+        df = pd.DataFrame(data)
+        dim = dm(df,"rooms", "SalePrice")

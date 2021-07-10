@@ -2,6 +2,7 @@ import pandas as pd
 from ds_helpers import linear_regression as ds
 from df_helpers import df_filters as df_fil
 
+
 class Dimension():
     def __init__(self, df: pd.DataFrame, x_column: str, y_column: str):
         '''Stores mx+b equation for a given dimension
@@ -13,6 +14,10 @@ class Dimension():
         '''
 
         df2 = df_fil.remove_nan_from_columns(df,x_column,y_column)
+        if df2.shape[0] == 0:
+            raise Exception('The dataframe is empty')
+
+
         self._mean = df2[y_column].mean()
 
         dim = ds.predict_mx_plus_b_from_df(df2,x_column,y_column)
