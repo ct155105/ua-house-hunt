@@ -1,15 +1,16 @@
+import ds_helpers
 import pandas as pd
 from timeit import default_timer as timer
 from county_services.oh import franklin as bll
 from models import linear_ai 
 from ds_helpers import linear_regression as ds
-from df_helpers import df_filters as df_fil
+from df_helpers import df_filters as df_fil, df_transformers as df_trans
 from ct_math import algebra as alg
 from matplotlib import pyplot as plt
 from data_science_models.models.dimension import Dimension as Dim
 from dal.oh import franklin as dal
 
-
+cols = ['TOTVALUEBASE','ShapeSTArea','ShapeSTLength','SALEDATE']
 
 start = timer()
 # df = dal.get_tax()
@@ -18,7 +19,26 @@ end = timer()
 df = bll.get_resi(bll.get_neighborhood(dal.get_tax(),'Upper Arlington'))
 # df = bll.get_resi(df)
 
-dim = Dim(df,'BUILDING',bll.get_tax_value_column())
+df = df_trans.date_column_str_to_epoch(df,'SALEDATE')
+
+df = df_fil.remove_zeros(df, 'SALEPRICE')
+# df = df_trans.
+
+model = ds.get_linear_model(df, cols, 'SALEPRICE')
+
+ken_df = df[df['SITEADDRESS'].str.contains('KENSINGTON',na=False)]
+ken_df['SALEDATE'] = 1626237249000000000
+
+test = model.predict(ken_df[cols].to_numpy())
+
+ken_adds = ken_df['SITEADDRESS'].tolist()
+y_pos = range(len(ken_adds))
+
+plt.bar(ken_adds,test.tolist())
+plt.xticks(y_pos, ken_adds, rotation=90)
+plt.tight_layout()
+plt.savefig('_temp/ct.png')
+
 
 print(end - start)
 
