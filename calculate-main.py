@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 from data_science_models.models.dimension import Dimension as Dim
 from dal.oh import franklin as dal
 
-cols = ['TOTVALUEBASE','ShapeSTArea','ShapeSTLength','SALEDATE']
+cols = ['TOTVALUEBASE','ShapeSTArea','ShapeSTLength','SALEDATE','ACRES','ROOMS','BATHS']
 
 start = timer()
 # df = dal.get_tax()
@@ -21,10 +21,10 @@ df = bll.get_resi(bll.get_neighborhood(dal.get_tax(),'Upper Arlington'))
 
 df = df_trans.date_column_str_to_epoch(df,'SALEDATE')
 
-df = df_fil.remove_zeros(df, 'SALEPRICE')
+df2 = df_fil.remove_zeros(df, 'SALEPRICE')
 # df = df_trans.
 
-model = ds.get_linear_model(df, cols, 'SALEPRICE')
+model = ds.get_linear_model(df2, cols, 'SALEPRICE')
 
 ken_df = df[df['SITEADDRESS'].str.contains('KENSINGTON',na=False)]
 ken_df['SALEDATE'] = 1626237249000000000
