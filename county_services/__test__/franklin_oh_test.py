@@ -59,4 +59,37 @@ def test_attic_cd_append():
     assert values[4] == 3
     assert values[5] == 4
     assert np.isnan(values[6])
+
+def test_get_attic_cd():
+    test = fkoh.get_condition_cd('POOR')
+    assert test  == 0
+    test = fkoh.get_condition_cd('FAIR')
+    assert test  == 1
+    test = fkoh.get_condition_cd('AVERAGE')
+    assert test  == 2
+    test = fkoh.get_condition_cd('GOOD')
+    assert test  == 3
+    test = fkoh.get_condition_cd('VERY GOOD')
+    assert test  == 4 
+    test = fkoh.get_condition_cd('EXCELLENT')
+    assert test  == 5
+    test = fkoh.get_condition_cd('DOES NOT MATCH')
+    assert np.isnan(test) 
+
+
+def test_condition_cd_append():
+    d = {'COND': ['POOR','POOR','FAIR','AVERAGE','GOOD','VERY GOOD','EXCELLENT','DOES NOT MATCH','GOOD']}
+    df = pd.DataFrame(d)
+    df = fkoh.append_condition_cd(df)
+    values = df['condition_cd'].values.tolist() 
+    
+    assert values[0] == 0
+    assert values[1] == 0
+    assert values[2] == 1
+    assert values[3] == 2
+    assert values[4] == 3
+    assert values[5] == 4
+    assert values[6] == 5
+    assert np.isnan(values[7])
+    assert values[8] == 3
     

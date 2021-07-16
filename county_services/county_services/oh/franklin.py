@@ -107,3 +107,54 @@ def append_attic_cd(df: pd.DataFrame) -> pd.DataFrame:
     df2['attic_cd'] = df2['ATTIC'].apply(lambda x: get_attic_cd(x))
 
     return df2
+
+def get_condition_cd(condition: str) -> int:
+    '''Gets the attic code value for the inputted string. Mappings are below:
+
+        'POOR' = 0
+        'FAIR' = 1
+        'AVERAGE' = 2
+        'GOOD' = 3
+        'VERY GOOD' = 4
+        'EXCELLENT' = 5 
+
+    Args:
+        condition: Condition of the property in English
+
+    Returns:
+        The code for the condition string    
+    
+    '''
+
+    result = np.NaN
+
+    if condition == 'POOR':
+        result = 0
+    if condition == 'FAIR':
+        result = 1
+    if condition == 'AVERAGE':
+        result = 2
+    if condition == 'GOOD':
+        result = 3
+    if condition == 'VERY GOOD':
+        result = 4 
+    if condition == 'EXCELLENT':
+        result = 5
+
+    return result
+
+
+def append_condition_cd(df: pd.DataFrame) -> pd.DataFrame:
+    '''Appends a new column to the dataframe called "condition_cd" from the 'COND' column
+    
+    Args:
+        df: The dataframe to append the column to
+    
+    Returns:
+        df with the new column appended    
+    '''
+
+    df2 = df.copy()
+    df2['condition_cd'] = df2['COND'].apply(lambda x: get_condition_cd(x))
+
+    return df2
